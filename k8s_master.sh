@@ -1,8 +1,8 @@
 #/bin/bash
 
 swapoff -a
-sed -i 's/^/dev/mapper/almalinux-swap none                    swap    defaults        0 0_#/dev/mapper/almalinux-swap none                    swap    defaults        0 0' /etc/fstab
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+sed -i 's_^/dev/mapper/almalinux-swap none                    swap    defaults        0 0_#/dev/mapper/almalinux-swap none                    swap    defaults        0 0_' /etc/fstab
+sed -i 's_^SELINUX=enforcing_SELINUX=permissive_' /etc/selinux/config
 dnf install -y iproute-tc
 
 
