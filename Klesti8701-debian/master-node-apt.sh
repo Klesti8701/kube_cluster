@@ -57,7 +57,7 @@ sudo sed -i 's/.* none.* swap.* sw.*/#&/' /etc/fstab
 sudo sed -i 's/^/#&/' /etc/initramfs-tools/conf.d/resume
 
 #edit the containerd configs 
-sudo sed 's/"cri"//' /etc/containerd/config.toml
+sudo sed -i 's/"cri"//' /etc/containerd/config.toml
 
 #config kernal communication modules 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
