@@ -55,6 +55,10 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 sudo swapoff -a
 sudo sed -i 's/.* none.* swap.* sw.*/#&/' /etc/fstab
 sudo sed -i 's/^/#&/' /etc/initramfs-tools/conf.d/resume
+
+#edit the containerd configs 
+sudo sed 's/"cri"//' /etc/containerd/config.toml
+
 #run the init command
 ip=$(ip a | grep "scope global" | grep -Po '(?<=inet )[\d.]+')
 printf "%s\n" "$ip"
