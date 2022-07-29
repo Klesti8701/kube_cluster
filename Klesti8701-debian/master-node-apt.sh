@@ -58,6 +58,8 @@ sudo sed -i 's/^/#&/' /etc/initramfs-tools/conf.d/resume
 
 #edit the containerd configs 
 sudo sed -i 's/"cri"//' /etc/containerd/config.toml
+sudo systemctl restart containerd
+
 
 #config kernal communication modules 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
