@@ -87,4 +87,7 @@ printf "%s\n" "$ip"
 echo "type 1 of this ips in which the kube-master domain will be routed"
 read -p 'ip: ' var
 echo "$var kube-master" |sudo tee -a /etc/hosts
-sudo kubeadm init --pod-network-cidr 192.168.150.0/24
+sudo kubeadm init --pod-network-cidr 192.168.150.0/16 && export KUBECONFIG=/etc/kubernetes/admin.conf
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
