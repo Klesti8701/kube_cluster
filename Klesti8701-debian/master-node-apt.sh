@@ -82,7 +82,7 @@ sudo sysctl --system
 
 #define the hostname for master
 read -p "hostname: " host
-sudo hostanamectl set-hostname $host
+sudo hostnamectl set-hostname $host
 
 #link the out ip to the hostname 
 ip=$(ip a | grep "scope global" | grep -Po '(?<=inet )[\d.]+')
