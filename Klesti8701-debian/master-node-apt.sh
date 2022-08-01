@@ -93,7 +93,7 @@ echo "$var $host" |sudo tee -a /etc/hosts
 
 
 #run the init command
-sudo kubeadm init --control-plane-endpoint=host --pod-network-cidr 192.168.150.0/16 > connection .txt && export KUBECONFIG=/etc/kubernetes/admin.conf
+sudo kubeadm init --control-plane-endpoint=$host --pod-network-cidr 192.168.150.0/16 > connection .txt && export KUBECONFIG=/etc/kubernetes/admin.conf
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -101,4 +101,6 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 #set up single nonde 
 kubectl taint nodes --all node-role.kubernetes.io/control-plane- node-role.kubernetes.io/master-
 
+
+#networking
 KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml
