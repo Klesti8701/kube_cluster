@@ -80,14 +80,20 @@ EOF
 # Apply sysctl params without reboot
 sudo sysctl --system
 
+#define the hostname for master
+read -p "hostname: " host
+sudo hostanamectl set-hostname $host
 
-#run the init command
+#link the out ip to the hostname 
 ip=$(ip a | grep "scope global" | grep -Po '(?<=inet )[\d.]+')
 printf "%s\n" "$ip"
 echo "type 1 of this ips in which the kube-master domain will be routed"
 read -p 'ip: ' var
-echo "$var kube-master" |sudo tee -a /etc/hosts
-sudo kubeadm init --pod-network-cidr 192.168.150.0/16 && export KUBECONFIG=/etc/kubernetes/admin.conf
+echo "$var $host" |sudo tee -a /etc/hosts
+
+
+#run the init command
+sudo kubeadm init --control-plane-endpoint=host --pod-network-cidr 192.168.150.0/16 > connection .txt && export KUBECONFIG=/etc/kubernetes/admin.conf
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
